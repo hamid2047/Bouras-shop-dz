@@ -1,0 +1,251 @@
+/*==================================
+   BOURAS.SHOP_DZ
+   HOME PAGE PREMIUM STYLE
+==================================*/
+
+
+/* HERO ANIMATION */
+
+.hero-slider{
+
+    overflow:hidden;
+
+}
+
+
+.slide{
+
+    position:relative;
+
+}
+
+
+.slide-content{
+
+    animation:textShow .8s ease;
+
+}
+
+
+.slide-image{
+
+    animation:imageShow .9s ease;
+
+}
+
+
+
+@keyframes textShow{
+
+from{
+
+opacity:0;
+transform:translateX(40px);
+
+}
+
+to{
+
+opacity:1;
+transform:translateX(0);
+
+}
+
+}
+
+
+
+@keyframes imageShow{
+
+from{
+
+opacity:0;
+transform:scale(.85);
+
+}
+
+to{
+
+opacity:1;
+transform:scale(1);
+
+}
+
+}
+
+
+
+
+
+/* CATEGORY HOME */
+
+
+.categories{
+
+background:white;
+
+}
+
+
+.category-card{
+
+cursor:pointer;
+
+}
+
+
+.category-card h3{
+
+margin-top:15px;
+font-weight:800;
+
+}
+
+
+
+
+
+/* PRODUCT SECTIONS */
+
+
+.latest-products,
+.best-selling,
+.offers{
+
+
+background:#f8fafc;
+
+}
+
+
+
+.latest-products .products-grid,
+.best-selling .products-grid,
+.offers .products-grid{
+
+margin-top:30px;
+
+}
+
+
+
+
+/* EMPTY PRODUCTS */
+
+
+.products-empty{
+
+background:white;
+
+padding:50px 20px;
+
+border-radius:25px;
+
+text-align:center;
+
+color:#777;
+
+font-size:18px;
+
+}
+
+
+
+
+
+/* OFFERS */
+
+
+.offers .section-header h2{
+
+color:#c1121f;
+
+}
+
+
+
+
+
+/* NEWSLETTER */
+
+
+.newsletter{
+
+background:#111827;
+color:white;
+text-align:center;
+
+}
+
+
+
+.newsletter h2{
+
+font-size:30px;
+
+}
+
+
+
+
+
+/* MOBILE HOME */
+
+
+@media(max-width:768px){
+
+
+
+.hero-slider{
+
+border-radius:20px;
+
+}
+
+
+
+.slide-content{
+
+padding:10px;
+
+}
+
+
+
+.slide-image img{
+
+max-height:260px;
+
+object-fit:contain;
+
+}
+
+
+
+.category-card{
+
+padding:20px 10px;
+
+}
+
+
+
+.category-card img{
+
+height:55px;
+
+}
+
+
+
+.latest-products,
+.best-selling,
+.offers{
+
+padding:40px 0;
+
+}
+
+
+
+}
