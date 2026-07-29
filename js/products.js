@@ -1,159 +1,193 @@
 /*==================================
         BOURAS.SHOP_DZ
-        PRODUCTS FROM FIREBASE
+        PROFESSIONAL PRODUCT ENGINE
 ===================================*/
 
 
-import { db } from "./firebase.js";
+import PRODUCTS from "../data/products.js";
 
+import CONFIG from "./config.js";
 
-import {
 
-    collection,
-    getDocs
 
-}
+// العناصر
 
-from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+const latestContainer =
+document.getElementById("latestProducts");
 
+const bestContainer =
+document.getElementById("bestSellingProducts");
 
+const offersContainer =
+document.getElementById("offersProducts");
 
 
 
-// جلب المنتجات
 
-async function loadProducts(){
 
+// عرض المنتجات
 
-    const productsContainer =
-    document.getElementById("latestProducts");
+function renderProducts(container, products){
 
 
-    const bestContainer =
-    document.getElementById("bestSellingProducts");
+    if(!container) return;
 
 
-    const offersContainer =
-    document.getElementById("offersProducts");
+    container.innerHTML="";
 
 
 
-    if(!productsContainer) return;
+    products.forEach(product=>{
 
 
+        const card = document.createElement("div");
 
-    try{
 
+        card.className="product-card";
 
-        const querySnapshot =
-        await getDocs(collection(db,"products"));
 
 
+        card.innerHTML = `
 
-        productsContainer.innerHTML="";
 
+        <div class="product-image">
 
-        querySnapshot.forEach((doc)=>{
 
+            <img src="${product.image || CONFIG.defaultImage}"
+            alt="${product.name}">
 
-            const product =
-            doc.data();
 
+            ${
+                product.offer ?
 
+                `<span class="discount">
+                عرض
+                </span>`
 
-            const card = `
+                :
 
-            <div class="product-card">
+                ""
 
+            }
 
-                <div class="product-image">
 
+            <button class="favorite-btn"
+            onclick="addFavorite(${product.id})">
 
-                    <img src="${product.image || 'assets/images/default.png'}"
-                    alt="${product.name}">
+            ♡
 
+            </button>
 
-                    <button class="favorite-btn">
 
-                        ♡
+        </div>
 
-                    </button>
 
 
-                </div>
 
+        <div class="product-info">
 
 
-                <div class="product-info">
+            <span class="category">
 
+            ${product.category}
 
-                    <div class="product-category">
+            </span>
 
-                        ${product.category || ''}
 
-                    </div>
 
+            <h3>
 
+            ${product.name}
 
-                    <h3 class="product-title">
+            </h3>
 
-                        ${product.name}
 
-                    </h3>
 
 
+            <div class="price">
 
-                    <div class="product-price">
 
+            ${
+            product.oldPrice ?
 
-                        <span class="new-price">
+            `<del>
+            ${product.oldPrice} ${CONFIG.currency}
+            </del>`
 
-                            ${product.price} دج
+            :
 
-                        </span>
+            ""
 
+            }
 
-                    </div>
 
+            <strong>
 
+            ${product.price}
+            ${CONFIG.currency}
 
-                    <button class="add-cart">
-
-                        أضف للسلة
-
-                    </button>
-
-
-
-                </div>
+            </strong>
 
 
             </div>
 
-            `;
 
 
 
-            productsContainer.innerHTML += card;
+            <button 
+            onclick="addToCart(${product.id})">
+
+            🛒 أضف للسلة
+
+            </button>
+
+
+        </div>
+
+
+        `;
 
 
 
-        });
+        container.appendChild(card);
+
+
+    });
+
+
+}
 
 
 
-    }
-
-    catch(error){
 
 
-        console.log(
-        "Firebase Error:",
-        error
-        );
+
+// تحميل الأقسام
+
+function loadProducts(){
 
 
-    }
+
+renderProducts(
+latestContainer,
+PRODUCTS
+);
+
+
+
+renderProducts(
+bestContainer,
+PRODUCTS.slice(0,6)
+);
+
+
+
+renderProducts(
+offersContainer,
+PRODUCTS.filter(
+item=>item.offer
+)
+);
 
 
 
@@ -163,9 +197,217 @@ async function loadProducts(){
 
 
 
-// تشغيل عند فتح الصفحة
+// البحث
+
+window.searchProducts=function(value){
+
+
+
+const result =
+PRODUCTS.filter(product=>
+
+product.name
+.includes(value)
+
+);
+
+
+
+renderProducts(
+latestContainer,
+result
+);
+
+
+
+};
+
+
+
+
+
+
+
+// السلة
+
+window.addToCart=function(id){
+
+
+
+let cart =
+JSON.parse(
+localStorage.getItem("cart")
+)
+|| [];
+
+
+
+const product =
+PRODUCTS.find(
+item=>item.id===id
+);
+
+
+
+if(!product)return;
+
+
+
+
+const old =
+cart.find(
+item=>item.id===id
+);
+
+
+
+if(old){
+
+
+old.quantity++;
+
+}
+
+else{
+
+
+cart.push({
+
+...product,
+
+quantity:1
+
+});
+
+
+}
+
+
+
+localStorage.setItem(
+"cart",
+JSON.stringify(cart)
+);
+
+
+
+updateCart();
+
+
+
+alert(
+"تمت إضافة المنتج للسلة"
+);
+
+
+
+};
+
+
+
+
+
+
+
+
+// تحديث عداد السلة
+
+function updateCart(){
+
+
+
+let cart =
+JSON.parse(
+localStorage.getItem("cart")
+)
+|| [];
+
+
+
+let count =
+cart.reduce(
+(a,b)=>a+b.quantity,
+0
+);
+
+
+
+const element =
+document.getElementById(
+"cartCount"
+);
+
+
+
+if(element)
+
+element.innerHTML=count;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// المفضلة
+
+window.addFavorite=function(id){
+
+
+
+let favorites =
+JSON.parse(
+localStorage.getItem("favorites")
+)
+|| [];
+
+
+
+if(!favorites.includes(id)){
+
+
+favorites.push(id);
+
+
+localStorage.setItem(
+"favorites",
+JSON.stringify(favorites)
+);
+
+
+
+alert(
+"تمت الإضافة للمفضلة"
+);
+
+
+}
+
+
+
+};
+
+
+
+
+
+
 
 document.addEventListener(
 "DOMContentLoaded",
-loadProducts
-);
+()=>{
+
+
+loadProducts();
+
+
+updateCart();
+
+
+});
