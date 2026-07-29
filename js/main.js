@@ -1,35 +1,39 @@
 /*==================================
    BOURAS.SHOP_DZ
-   MAIN JAVASCRIPT
+   PREMIUM MAIN JS
 ==================================*/
 
 
-//==============================
+// ===============================
 // SIDE MENU
-//==============================
+// ===============================
 
 
 const menuBtn = document.getElementById("menuBtn");
-
 const sideMenu = document.querySelector(".side-menu");
-
 const overlay = document.querySelector(".overlay");
+
+
+function closeMenu(){
+
+    if(sideMenu)
+        sideMenu.classList.remove("active");
+
+    if(overlay)
+        overlay.classList.remove("active");
+
+}
 
 
 
 if(menuBtn){
 
+menuBtn.addEventListener("click",()=>{
 
-menuBtn.onclick = ()=>{
+    sideMenu.classList.add("active");
+    overlay.classList.add("active");
 
-
-sideMenu.classList.add("active");
-
-overlay.classList.add("active");
-
-
-};
-
+});
 
 }
 
@@ -37,62 +41,47 @@ overlay.classList.add("active");
 
 if(overlay){
 
-
-overlay.onclick = ()=>{
-
-
-sideMenu.classList.remove("active");
-
-overlay.classList.remove("active");
-
-
-};
-
+overlay.addEventListener("click",closeMenu);
 
 }
 
 
 
-//==============================
+
+
+// ===============================
 // HERO SLIDER
-//==============================
+// ===============================
 
 
-let slides = document.querySelectorAll(".slide");
-
-let currentSlide = 0;
-
+const slides =
+document.querySelectorAll(".slide");
 
 
-function changeSlide(){
+let slideIndex = 0;
 
 
-slides.forEach(slide=>{
+
+function showSlide(index){
+
+
+slides.forEach((slide,i)=>{
+
+
+if(i === index){
+
+slide.classList.add("active");
+
+}else{
 
 slide.classList.remove("active");
+
+}
+
 
 });
 
 
-if(slides.length){
-
-
-slides[currentSlide].classList.add("active");
-
-
-currentSlide++;
-
-
-if(currentSlide >= slides.length){
-
-currentSlide = 0;
-
-}
-
-
-}
-
-
 }
 
 
@@ -100,7 +89,26 @@ currentSlide = 0;
 if(slides.length){
 
 
-setInterval(changeSlide,5000);
+showSlide(0);
+
+
+setInterval(()=>{
+
+
+slideIndex++;
+
+
+if(slideIndex >= slides.length){
+
+slideIndex = 0;
+
+}
+
+
+showSlide(slideIndex);
+
+
+},5000);
 
 
 }
@@ -109,22 +117,20 @@ setInterval(changeSlide,5000);
 
 
 
-//==============================
+// ===============================
 // CART SYSTEM
-//==============================
+// ===============================
 
 
-let cart = JSON.parse(
-localStorage.getItem("cart")
-) || [];
-
+let cart =
+JSON.parse(localStorage.getItem("cart")) || [];
 
 
 
-function addToCart(id){
+function addToCart(product){
 
 
-cart.push(id);
+cart.push(product);
 
 
 localStorage.setItem(
@@ -137,12 +143,10 @@ JSON.stringify(cart)
 updateCartCount();
 
 
-
-alert("تمت إضافة المنتج إلى السلة 🛒");
+showMessage("تمت إضافة المنتج للسلة 🛒");
 
 
 }
-
 
 
 
@@ -150,18 +154,15 @@ alert("تمت إضافة المنتج إلى السلة 🛒");
 function updateCartCount(){
 
 
-const count =
+const counter =
 document.getElementById("cartCount");
 
 
-if(count){
+if(counter){
 
-
-count.innerHTML = cart.length;
-
+counter.innerText = cart.length;
 
 }
-
 
 
 }
@@ -173,27 +174,34 @@ updateCartCount();
 
 
 
-//==============================
+
+
+// ===============================
 // FAVORITES
-//==============================
+// ===============================
 
 
 let favorites =
-JSON.parse(
-localStorage.getItem("favorites")
-) || [];
+JSON.parse(localStorage.getItem("favorites")) || [];
 
 
 
 
-
-function addFavorite(id){
-
-
-if(!favorites.includes(id)){
+function addFavorite(product){
 
 
-favorites.push(id);
+
+let exists =
+favorites.find(
+item=>item.id===product.id
+);
+
+
+
+if(!exists){
+
+
+favorites.push(product);
 
 
 localStorage.setItem(
@@ -202,17 +210,17 @@ JSON.stringify(favorites)
 );
 
 
-alert("تمت الإضافة إلى المفضلة ❤️");
+showMessage("تمت الإضافة للمفضلة ❤️");
 
 
 }
+
 
 
 updateFavoriteCount();
 
 
 }
-
 
 
 
@@ -220,23 +228,19 @@ updateFavoriteCount();
 function updateFavoriteCount(){
 
 
-const count =
+const counter =
 document.getElementById("favoriteCount");
 
 
+if(counter){
 
-if(count){
-
-
-count.innerHTML =
+counter.innerText =
 favorites.length;
 
-
 }
 
 
 }
-
 
 
 updateFavoriteCount();
@@ -246,31 +250,34 @@ updateFavoriteCount();
 
 
 
-//==============================
-// SEARCH
-//==============================
+// ===============================
+// SEARCH SYSTEM
+// ===============================
 
 
 function searchProducts(value){
 
 
 let text =
-value.toLowerCase();
+value.toLowerCase().trim();
 
 
 
-let cards =
-document.querySelectorAll(".product-card");
+document
+.querySelectorAll(".product-card")
+.forEach(card=>{
 
 
+let title =
+card.querySelector("h3");
 
-cards.forEach(card=>{
+
+if(!title) return;
+
 
 
 let name =
-card.querySelector("h3")
-.innerText
-.toLowerCase();
+title.innerText.toLowerCase();
 
 
 
@@ -298,16 +305,63 @@ card.style.display="none";
 
 
 
-//==============================
+
+
+
+// ===============================
+// MESSAGE SYSTEM
+// ===============================
+
+
+function showMessage(text){
+
+
+let box =
+document.createElement("div");
+
+
+box.innerText=text;
+
+
+box.style.position="fixed";
+box.style.bottom="30px";
+box.style.right="30px";
+box.style.background="#c1121f";
+box.style.color="white";
+box.style.padding="15px 25px";
+box.style.borderRadius="30px";
+box.style.zIndex="9999";
+
+
+document.body.appendChild(box);
+
+
+
+setTimeout(()=>{
+
+box.remove();
+
+},2500);
+
+
+}
+
+
+
+
+
+
+// ===============================
 // SMOOTH SCROLL
-//==============================
+// ===============================
 
 
-document.querySelectorAll("a[href^='#']")
+document
+.querySelectorAll('a[href^="#"]')
 .forEach(link=>{
 
 
-link.onclick=function(e){
+link.addEventListener("click",function(e){
 
 
 let target =
@@ -333,8 +387,7 @@ behavior:"smooth"
 }
 
 
-
-};
+});
 
 
 });
