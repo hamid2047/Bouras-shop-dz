@@ -1,12 +1,12 @@
 /*==================================
    BOURAS.SHOP_DZ
-   CLEAN RESPONSIVE SYSTEM
+   FINAL RESPONSIVE SYSTEM
 ==================================*/
 
 
-/* TABLET */
+/* ================= TABLET ================= */
 
-@media (max-width:992px){
+@media(max-width:992px){
 
 
 .container{
@@ -19,11 +19,11 @@ width:94%;
 
 /* HEADER */
 
-
 .header .container{
 
+height:auto;
+padding:15px 0;
 flex-wrap:wrap;
-gap:15px;
 
 }
 
@@ -37,11 +37,18 @@ width:105px;
 
 .search-box{
 
-width:100%;
 order:3;
+width:100%;
 
 }
 
+
+
+.header-icons{
+
+gap:10px;
+
+}
 
 
 
@@ -50,23 +57,19 @@ order:3;
 
 .slide{
 
+padding:35px;
 flex-direction:column;
-gap:30px;
 text-align:center;
+gap:35px;
 
 }
 
 
-.slide-content{
 
-width:100%;
-
-}
-
-
+.slide-content,
 .slide-image{
 
-width:80%;
+width:100%;
 
 }
 
@@ -74,15 +77,22 @@ width:80%;
 
 .slide h1{
 
-font-size:36px;
+font-size:35px;
+
+}
+
+
+
+.slide-image{
+
+max-width:500px;
 
 }
 
 
 
 
-
-/* GRID SYSTEM */
+/* CATEGORY */
 
 
 .category-grid{
@@ -93,6 +103,9 @@ grid-template-columns:repeat(3,1fr);
 
 
 
+/* PRODUCTS */
+
+
 .products-grid{
 
 grid-template-columns:repeat(2,1fr);
@@ -100,6 +113,9 @@ grid-template-columns:repeat(2,1fr);
 }
 
 
+
+
+/* WHY */
 
 
 .why-grid{
@@ -115,12 +131,10 @@ grid-template-columns:repeat(2,1fr);
 
 
 
-
-/* MOBILE */
+/* ================= MOBILE ================= */
 
 
 @media(max-width:600px){
-
 
 
 .container{
@@ -149,6 +163,7 @@ justify-content:center;
 }
 
 
+
 .logo img{
 
 width:90px;
@@ -156,21 +171,22 @@ width:90px;
 }
 
 
-.header-icons{
-
-gap:10px;
-
-}
-
 
 .header-icons a,
 .header-icons button{
 
-width:38px;
-height:38px;
+width:40px;
+height:40px;
 
 }
 
+
+
+.search-box input{
+
+font-size:14px;
+
+}
 
 
 
@@ -179,25 +195,27 @@ height:38px;
 
 .hero{
 
-padding:25px 0;
+padding:20px 0;
 
 }
+
 
 
 .slide{
 
 padding:25px 15px;
-
 border-radius:22px;
 
 }
 
 
+
 .slide h1{
 
-font-size:25px;
+font-size:26px;
 
 }
+
 
 
 .slide p{
@@ -208,9 +226,18 @@ font-size:14px;
 
 
 
-.slide-image{
+.hero-btn{
 
-width:100%;
+padding:12px 25px;
+
+}
+
+
+
+.slide-image img{
+
+max-height:230px;
+object-fit:contain;
 
 }
 
@@ -226,6 +253,7 @@ width:100%;
 font-size:24px;
 
 }
+
 
 
 
@@ -249,9 +277,10 @@ padding:15px 10px;
 }
 
 
+
 .category-card img{
 
-height:50px;
+height:55px;
 
 }
 
@@ -272,6 +301,7 @@ gap:12px;
 
 .product-card{
 
+padding:10px;
 border-radius:18px;
 
 }
@@ -280,7 +310,7 @@ border-radius:18px;
 
 .product-image{
 
-height:160px;
+height:170px;
 
 }
 
@@ -289,8 +319,18 @@ height:160px;
 .product-card h3{
 
 font-size:14px;
+min-height:auto;
 
 }
+
+
+
+.price{
+
+font-size:18px;
+
+}
+
 
 
 
@@ -310,9 +350,7 @@ grid-template-columns:1fr;
 /* FOOTER */
 
 
-.footer-content{
-
-grid-template-columns:1fr;
+.footer{
 
 text-align:center;
 
@@ -326,18 +364,6 @@ justify-content:center;
 
 }
 
-
-
-
-/* WHATSAPP */
-
-
-.whatsapp-btn{
-
-width:55px;
-height:55px;
-
-}
 
 
 
