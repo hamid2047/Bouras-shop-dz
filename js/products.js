@@ -1,50 +1,59 @@
 /*==================================
    BOURAS.SHOP_DZ
-   PRODUCTS DISPLAY SYSTEM
+   PREMIUM PRODUCTS SYSTEM
 ==================================*/
 
 
-// جلب المنتجات من التخزين
-
 let products =
-JSON.parse(localStorage.getItem("products"))
-|| [];
+JSON.parse(localStorage.getItem("products")) || [];
 
 
 
 
-// عرض المنتجات
+// ===============================
+// DISPLAY PRODUCTS
+// ===============================
+
 
 function displayProducts(){
 
 
-const container =
-document.getElementById("latestProducts");
+const containers = [
+
+"latestProducts",
+"bestSellingProducts",
+"offersProducts"
+
+];
 
 
 
-if(!container) return;
+containers.forEach(id=>{
+
+
+const box =
+document.getElementById(id);
+
+
+if(box){
+
+box.innerHTML="";
+
+
+products.forEach(product=>{
+
+
+box.innerHTML += createProductCard(product);
+
+
+});
+
+
+}
 
 
 
-container.innerHTML="";
-
-
-
-if(products.length === 0){
-
-
-container.innerHTML = `
-
-<div class="empty">
-
-لا توجد منتجات حاليا
-
-</div>
-
-`;
-
-return;
+});
 
 
 }
@@ -52,10 +61,15 @@ return;
 
 
 
-products.forEach(product=>{
+// ===============================
+// PRODUCT CARD
+// ===============================
 
 
-container.innerHTML += `
+function createProductCard(product){
+
+
+return `
 
 
 <div class="product-card">
@@ -64,14 +78,19 @@ container.innerHTML += `
 <div class="product-image">
 
 
-<img src="${product.image}">
+<img src="${product.image || 'assets/images/default.png'}"
+alt="${product.name}">
 
 
-<button onclick="addFavorite(${product.id})">
+
+<button class="favorite-btn"
+onclick='addFavorite(${JSON.stringify(product)})'>
 
 ♡
 
+
 </button>
+
 
 
 </div>
@@ -88,7 +107,7 @@ ${product.name}
 
 <p>
 
-${product.category}
+${product.category || ""}
 
 </p>
 
@@ -102,7 +121,7 @@ ${product.price} دج
 
 
 
-<button onclick="addToCart(${product.id})">
+<button onclick='addToCart(${JSON.stringify(product)})'>
 
 🛒 أضف للسلة
 
@@ -115,10 +134,50 @@ ${product.price} دج
 
 `;
 
+}
+
+
+
+
+
+// ===============================
+// SEARCH FILTER
+// ===============================
+
+
+function filterProducts(category){
+
+
+let filtered =
+products.filter(product=>{
+
+
+return product.category === category;
 
 
 });
 
+
+
+const box =
+document.getElementById("latestProducts");
+
+
+if(!box) return;
+
+
+
+box.innerHTML="";
+
+
+
+filtered.forEach(product=>{
+
+
+box.innerHTML += createProductCard(product);
+
+
+});
 
 
 }
@@ -126,9 +185,18 @@ ${product.price} دج
 
 
 
-// تشغيل
+
+// ===============================
+// LOAD
+// ===============================
+
 
 document.addEventListener(
 "DOMContentLoaded",
-displayProducts
-);
+()=>{
+
+
+displayProducts();
+
+
+});
