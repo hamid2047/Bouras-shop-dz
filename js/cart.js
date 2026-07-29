@@ -1,31 +1,12 @@
 /*==================================
    BOURAS.SHOP_DZ
-   CART SYSTEM
+   PREMIUM CART SYSTEM
 ==================================*/
 
 
-document.addEventListener("DOMContentLoaded",()=>{
-
-
 let cart =
-JSON.parse(
-localStorage.getItem("cart")
-) || [];
-
-
-
-const container =
-document.getElementById("cartContainer");
-
-
-
-const totalBox =
-document.getElementById("totalPrice");
-
-
-
-const countBox =
-document.getElementById("itemsCount");
+JSON.parse(localStorage.getItem("cart"))
+|| [];
 
 
 
@@ -35,42 +16,36 @@ document.getElementById("itemsCount");
 function displayCart(){
 
 
-if(!container) return;
+const box =
+document.getElementById("cartContainer");
+
+
+if(!box) return;
 
 
 
-container.innerHTML="";
+if(cart.length === 0){
 
 
+box.innerHTML = `
 
-if(cart.length===0){
-
-
-container.innerHTML=`
-
-<div class="products-empty">
-
+<div class="cart-empty">
 
 <h2>
-السلة فارغة 🛒
+🛒 السلة فارغة
 </h2>
 
-
 <a href="index.html">
-
-ابدأ التسوق
-
+العودة للتسوق
 </a>
 
 
 </div>
 
-
 `;
 
 
-
-updateTotal();
+updateSummary();
 
 return;
 
@@ -79,14 +54,17 @@ return;
 
 
 
+box.innerHTML="";
+
+
+
 cart.forEach((item,index)=>{
 
 
-container.innerHTML += `
+box.innerHTML += `
 
 
 <div class="cart-item">
-
 
 
 <div class="cart-image">
@@ -94,7 +72,6 @@ container.innerHTML += `
 <img src="${item.image}">
 
 </div>
-
 
 
 
@@ -109,7 +86,8 @@ ${item.name}
 </h3>
 
 
-<p>
+
+<p class="cart-price">
 
 ${item.price} دج
 
@@ -117,14 +95,11 @@ ${item.price} دج
 
 
 
+<div class="quantity">
 
-<div class="cart-actions">
 
-
-<button onclick="minus(${index})">
-
+<button onclick="changeQty(${index},-1)">
 -
-
 </button>
 
 
@@ -137,20 +112,8 @@ ${item.qty}
 
 
 
-<button onclick="plus(${index})">
-
+<button onclick="changeQty(${index},1)">
 +
-
-</button>
-
-
-
-<button class="delete"
-
-onclick="removeItem(${index})">
-
-🗑
-
 </button>
 
 
@@ -158,11 +121,36 @@ onclick="removeItem(${index})">
 </div>
 
 
+
+</div>
+
+
+
+
+<div class="cart-actions">
+
+
+<strong>
+
+${item.price * item.qty} دج
+
+</strong>
+
+
+
+<button onclick="removeItem(${index})">
+
+🗑 حذف
+
+</button>
+
+
 </div>
 
 
 
 </div>
+
 
 
 `;
@@ -173,7 +161,7 @@ onclick="removeItem(${index})">
 
 
 
-updateTotal();
+updateSummary();
 
 
 }
@@ -182,41 +170,28 @@ updateTotal();
 
 
 
-
-// زيادة الكمية
-
-window.plus=function(index){
+// تغيير الكمية
 
 
-cart[index].qty++;
+function changeQty(index,value){
 
 
-saveCart();
-
-
-};
+cart[index].qty += value;
 
 
 
+if(cart[index].qty < 1){
 
-
-// نقصان الكمية
-
-window.minus=function(index){
-
-
-if(cart[index].qty>1){
-
-cart[index].qty--;
+cart[index].qty = 1;
 
 }
 
 
+
 saveCart();
 
 
-};
-
+}
 
 
 
@@ -224,7 +199,8 @@ saveCart();
 
 // حذف منتج
 
-window.removeItem=function(index){
+
+function removeItem(index){
 
 
 cart.splice(index,1);
@@ -233,9 +209,7 @@ cart.splice(index,1);
 saveCart();
 
 
-};
-
-
+}
 
 
 
@@ -243,24 +217,20 @@ saveCart();
 
 // حفظ السلة
 
+
 function saveCart(){
 
 
 localStorage.setItem(
-
 "cart",
-
 JSON.stringify(cart)
-
 );
-
 
 
 displayCart();
 
 
 }
-
 
 
 
@@ -268,45 +238,43 @@ displayCart();
 
 // الحساب
 
-function updateTotal(){
+
+function updateSummary(){
 
 
+let count =
+0;
 
-let total=0;
 
-let count=0;
+let total =
+0;
 
 
 
 cart.forEach(item=>{
 
 
-total += Number(item.price) * Number(item.qty);
+count += item.qty;
 
 
-count += Number(item.qty);
+total += item.price * item.qty;
 
 
 });
 
 
 
+document.getElementById(
+"itemsCount"
+).innerHTML = count;
 
-if(totalBox){
 
-totalBox.innerHTML =
+
+document.getElementById(
+"totalPrice"
+).innerHTML =
 total + " دج";
 
-}
-
-
-
-if(countBox){
-
-countBox.innerHTML =
-count;
-
-}
 
 
 }
@@ -315,51 +283,67 @@ count;
 
 
 
+// الطلب عبر واتساب
 
 
-// زر الطلب
+document.getElementById(
+"checkoutBtn"
+).onclick=function(){
 
-const checkout =
-document.getElementById("checkoutBtn");
-
-
-
-if(checkout){
-
-
-checkout.onclick=function(){
 
 
 if(cart.length===0){
 
-
 alert("السلة فارغة");
 
-
 return;
-
 
 }
 
 
 
-window.location.href =
-"checkout.html";
+let message =
+"مرحبا أريد طلب:%0A";
+
+
+
+cart.forEach(item=>{
+
+
+message +=
+"- "+item.name+
+" × "+
+item.qty+
+"%0A";
+
+
+});
+
+
+
+message +=
+"%0Aالمجموع: "+
+document.getElementById(
+"totalPrice"
+).innerText;
+
+
+
+window.open(
+
+"https://wa.me/213778196483?text="
++message,
+
+"_blank"
+
+);
 
 
 
 };
 
 
-}
-
-
-
 
 
 
 displayCart();
-
-
-
-});
