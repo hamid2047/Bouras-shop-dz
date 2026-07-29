@@ -2,132 +2,112 @@
 <html lang="ar" dir="rtl">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Bouras.shop_dz | متجر إلكتروني جزائري</title>
+<meta charset="UTF-8">
 
-    <meta name="description"
-        content="Bouras.shop_dz متجر إلكتروني جزائري لبيع الملابس والأحذية والإكسسوارات والعطور ومواد التجميل والألعاب مع الدفع عند الاستلام.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="keywords"
-        content="Bouras, الجزائر, متجر, ملابس, أحذية, عطور, ألعاب, إكسسوارات">
 
-    <meta name="author" content="Bouras.shop_dz">
+<title>
+Bouras.shop_dz | متجر إلكتروني جزائري
+</title>
 
-    <meta name="theme-color" content="#C1121F">
 
-    <link rel="icon" href="assets/logo/favicon.png">
+<meta name="description"
+content="Bouras.shop_dz متجر إلكتروني عصري للملابس والأحذية والعطور والإكسسوارات">
 
-    <link rel="manifest" href="manifest.json">
 
-    <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css">
 
-    <link rel="stylesheet" href="css/home.css">
+<link rel="stylesheet" href="css/home.css">
 
-    <link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="css/responsive.css">
 
-    <!-- Google Font -->
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap"
+rel="stylesheet">
 
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
 
-    <!-- Font Awesome -->
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 </head>
 
+
+
 <body>
 
-<!--=============================
-        TOP BAR
-==============================-->
 
-<div class="top-bar">
+<!-- HEADER -->
 
-    <div class="container">
+<header class="premium-header">
 
-        <div class="top-right">
-
-            🚚 توصيل لجميع ولايات الجزائر
-
-        </div>
-
-        <div class="top-left">
-
-            الدفع عند الاستلام
-
-        </div>
-
-    </div>
-
-</div>
-
-<!--=============================
-          HEADER
-==============================-->
-
-<header class="header">
 
 <div class="container">
+
+
 
 <div class="logo">
 
 <a href="index.html">
 
-<img src="assets/logo/logo.png" alt="Bouras.shop_dz">
+<img src="assets/logo/logo.png"
+alt="Bouras">
 
 </a>
 
 </div>
 
-<div class="search-box">
+
+
+<div class="search">
+
 
 <input
-type="text"
-placeholder="ابحث عن منتج..."
 id="searchInput"
-onkeyup="searchProducts(this.value)">
+onkeyup="searchProducts(this.value)"
+placeholder="ابحث عن منتج...">
+
 
 <button>
 
-<i class="fa-solid fa-magnifying-glass"></i>
+<i class="fa-solid fa-search"></i>
 
 </button>
 
+
 </div>
 
-<div class="header-icons">
+
+
+<div class="header-actions">
+
 
 <a href="favorites.html">
 
 <i class="fa-regular fa-heart"></i>
 
 <span id="favoriteCount">
-
 0
-
 </span>
 
 </a>
+
+
 
 <a href="cart.html">
 
 <i class="fa-solid fa-cart-shopping"></i>
 
 <span id="cartCount">
-
 0
-
 </span>
 
 </a>
+
+
 
 <button id="menuBtn">
 
@@ -135,533 +115,375 @@ onkeyup="searchProducts(this.value)">
 
 </button>
 
-</div>
 
 </div>
+
+
+
+</div>
+
 
 </header>
 
-<!--==========================
-      SIDE MENU
-===========================-->
 
-<div class="overlay"></div>
 
-<aside class="side-menu">
 
-<div class="menu-header">
 
-<img src="assets/logo/logo.png">
+<!-- HERO -->
 
-<h2>
+<section class="premium-hero">
 
-Bouras.shop_dz
 
-</h2>
+<div class="container hero-content">
 
-</div>
 
-<li>
+<div class="hero-text">
 
-<a href="admin.html">
 
-⚙️ لوحة الإدارة
+<span class="badge">
 
-</a>
+🔥 عروض حصرية اليوم
 
-</li>
+</span>
 
-<ul>
 
-<li>
 
-<a href="index.html">
+<h1>
 
-🏠 الرئيسية
+تسوق كل ما تحتاجه
+<br>
 
-</a>
+بأفضل الأسعار
 
-</li>
+</h1>
 
-<li>
 
-<a href="category/clothes.html">
 
-👕
+<p>
 
-الملابس
+ملابس • أحذية • عطور • تجميل • إكسسوارات • ألعاب
 
-</a>
+</p>
 
-</li>
 
-<li>
 
-<a href="category/shoes.html">
+<div class="hero-buttons">
 
-👟
 
-الأحذية
+<a href="#products"
+class="main-btn">
+
+ابدأ التسوق
 
 </a>
 
-</li>
 
-<li>
 
-<a href="category/accessories.html">
-
-💍
-
-الإكسسوارات
-
-</a>
-
-</li>
-
-<li>
-
-<a href="category/cosmetics.html">
-
-💄
-
-مواد التجميل
-
-</a>
-
-</li>
-
-<li>
-
-<a href="category/perfumes.html">
-
-🌹
-
-العطور
-
-</a>
-
-</li>
-
-<li>
-
-<a href="category/games.html">
-
-🎮
-
-الألعاب
-
-</a>
-
-</li>
-
-<li>
-
-<a href="offers.html">
-
-🔥
+<a href="offers.html"
+class="second-btn">
 
 العروض
 
 </a>
 
-</li>
 
-<li>
+</div>
 
-<a href="favorites.html">
 
-❤️
 
-المفضلة
+</div>
 
-</a>
 
-</li>
 
-<li>
 
-<a href="cart.html">
+<div class="hero-image">
 
-🛒
 
-السلة
+<img src="assets/banners/banner1.png"
+alt="Bouras Shop">
 
-</a>
 
-</li>
+</div>
 
-<li>
 
-<a href="contact.html">
 
-📞
+</div>
 
-اتصل بنا
-
-</a>
-
-</li>
-
-<li>
-
-<a href="about.html">
-
-ℹ️
-
-من نحن
-
-</a>
-
-</li>
-
-</ul>
-
-</aside>
-
-<main>
-
-<!--==================================
-            HERO SLIDER
-===================================-->
-
-<section class="hero">
-
-    <div class="hero-slider">
-
-        <!-- Slide 1 -->
-
-        <div class="slide active">
-
-            <div class="slide-content">
-
-                <span class="offer-badge">
-                    🔥 خصومات تصل إلى 70%
-                </span>
-
-                <h1>
-                    تسوق أحدث المنتجات
-                </h1>
-
-                <p>
-
-                    ملابس - أحذية - إكسسوارات - عطور
-                    مواد تجميل - ألعاب
-
-                </p>
-
-                <a href="offers.html" class="hero-btn">
-
-                    تسوق الآن
-
-                </a>
-
-            </div>
-
-            <div class="slide-image">
-
-                <img src="assets/banners/banner1.png"
-                    alt="Bouras Shop">
-
-            </div>
-
-        </div>
-
-        <!-- Slide 2 -->
-
-        <div class="slide">
-
-            <div class="slide-content">
-
-                <span class="offer-badge">
-
-                    🚚 الدفع عند الاستلام
-
-                </span>
-
-                <h1>
-
-                    توصيل لجميع ولايات الجزائر
-
-                </h1>
-
-                <p>
-
-                    اطلب الآن وسيصلك المنتج بسرعة.
-
-                </p>
-
-                <a href="category/clothes.html"
-                    class="hero-btn">
-
-                    ابدأ التسوق
-
-                </a>
-
-            </div>
-
-            <div class="slide-image">
-
-                <img src="assets/banners/banner2.png"
-                    alt="Delivery">
-
-            </div>
-
-        </div>
-
-    </div>
 
 </section>
 
-<!--==================================
-            CATEGORIES
-===================================-->
+<!-- ==============================
+        CATEGORIES PREMIUM
+================================ -->
 
-<section class="categories">
+<section class="premium-categories">
 
 <div class="container">
 
-<div class="section-title">
+
+<div class="section-heading">
+
+<span>
+الأقسام
+</span>
+
+<h2>
+تسوق حسب الفئة
+</h2>
+
+</div>
+
+
+
+<div class="categories-grid">
+
+
+
+<a href="category/clothes.html"
+class="category-box">
+
+<div class="icon">
+👕
+</div>
+
+<h3>
+الملابس
+</h3>
+
+</a>
+
+
+
+
+<a href="category/shoes.html"
+class="category-box">
+
+<div class="icon">
+👟
+</div>
+
+<h3>
+الأحذية
+</h3>
+
+</a>
+
+
+
+
+<a href="category/perfumes.html"
+class="category-box">
+
+<div class="icon">
+🌹
+</div>
+
+<h3>
+العطور
+</h3>
+
+</a>
+
+
+
+
+<a href="category/cosmetics.html"
+class="category-box">
+
+<div class="icon">
+💄
+</div>
+
+<h3>
+التجميل
+</h3>
+
+</a>
+
+
+
+
+<a href="category/accessories.html"
+class="category-box">
+
+<div class="icon">
+💍
+</div>
+
+<h3>
+الإكسسوارات
+</h3>
+
+</a>
+
+
+
+
+<a href="category/games.html"
+class="category-box">
+
+<div class="icon">
+🎮
+</div>
+
+<h3>
+الألعاب
+</h3>
+
+</a>
+
+
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+
+
+
+<!-- ==============================
+        PRODUCTS
+================================ -->
+
+
+<section class="premium-products"
+id="products">
+
+
+<div class="container">
+
+
+
+<div class="section-heading">
+
+
+<span>
+منتجاتنا
+</span>
+
+
+<h2>
+أحدث المنتجات
+</h2>
+
+
+
+</div>
+
+
+
+
+<div class="products-grid"
+id="latestProducts">
+
+
+<!-- المنتجات تظهر تلقائيا -->
+
+
+
+</div>
+
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+<!-- ==============================
+        OFFERS
+================================ -->
+
+
+<section class="flash-sale">
+
+
+<div class="container">
+
+
+
+<div class="sale-box">
+
+
+
+<div class="sale-text">
+
+
+<span>
+🔥 تخفيضات قوية
+</span>
+
 
 <h2>
 
-تصفح حسب القسم
+عروض تصل إلى 70%
 
 </h2>
+
 
 <p>
 
-اختر القسم الذي تريد التسوق منه
+لا تفوت أفضل الأسعار اليوم
 
 </p>
 
-</div>
 
-<div class="category-grid">
-
-<a href="category/clothes.html" class="category-card">
-
-<img src="assets/icons/clothes.png">
-
-<h3>
-
-الملابس
-
-</h3>
-
-</a>
-
-<a href="category/shoes.html" class="category-card">
-
-<img src="assets/icons/shoes.png">
-
-<h3>
-
-الأحذية
-
-</h3>
-
-</a>
-
-<a href="category/accessories.html" class="category-card">
-
-<img src="assets/icons/accessories.png">
-
-<h3>
-
-الإكسسوارات
-
-</h3>
-
-</a>
-
-<a href="category/cosmetics.html" class="category-card">
-
-<img src="assets/icons/cosmetics.png">
-
-<h3>
-
-مواد التجميل
-
-</h3>
-
-</a>
-
-<a href="category/perfumes.html" class="category-card">
-
-<img src="assets/icons/perfume.png">
-
-<h3>
-
-العطور
-
-</h3>
-
-</a>
-
-<a href="category/games.html" class="category-card">
-
-<img src="assets/icons/games.png">
-
-<h3>
-
-الألعاب
-
-</h3>
-
-</a>
-
-</div>
-
-</div>
-
-</section>
-
-<!--==================================
-        LATEST PRODUCTS
-===================================-->
-
-<section class="latest-products">
-
-<div class="container">
-
-<div class="section-header">
-
-<h2>
-
-أحدث المنتجات
-
-</h2>
-
-<a href="#">
-
-عرض الكل
-
-<i class="fa-solid fa-arrow-left"></i>
-
-</a>
-
-</div>
-
-<div class="products-grid"
-
-id="latestProducts">
-
-<!--
-سيتم جلب المنتجات من قاعدة المنتجات المحلية
--->
--->
-
-</div>
-
-</div>
-
-</section>
-
-<!--==================================
-      BEST SELLING
-===================================-->
-
-<section class="best-selling">
-
-<div class="container">
-
-<div class="section-header">
-
-<h2>
-
-الأكثر مبيعاً
-
-</h2>
-
-<a href="#">
-
-عرض الكل
-
-<i class="fa-solid fa-arrow-left"></i>
-
-</a>
-
-</div>
-
-<div class="products-grid"
-
-id="bestSellingProducts">
-
-<!-- Products System -->
-
-</div>
-
-</div>
-
-</section>
-
-
-<!--==================================
-        OFFERS SECTION
-===================================-->
-
-<section class="offers">
-
-<div class="container">
-
-<div class="section-header">
-
-<h2>
-
-🔥 العروض الخاصة
-
-</h2>
 
 <a href="offers.html">
 
-عرض الكل
-
-<i class="fa-solid fa-arrow-left"></i>
+شاهد العروض
 
 </a>
 
-</div>
-
-
-<div class="products-grid" id="offersProducts">
-
-<!-- سيتم جلب العروض من ملف المنتجات -->
-
-</div>
 
 
 </div>
+
+
+
+
+<div class="sale-image">
+
+
+<img src="assets/banners/banner2.png"
+alt="offers">
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
 
 </section>
 
-
-
-<!--==================================
+<!--=============================
         WHY US
-===================================-->
+==============================-->
 
 <section class="why-us">
 
 <div class="container">
 
-
-<div class="section-title">
-
 <h2>
-
-لماذا Bouras.shop_dz ؟
-
+لماذا تختار Bouras.shop_dz؟
 </h2>
-
-<p>
-
-أفضل تجربة تسوق إلكتروني في الجزائر
-
-</p>
-
-</div>
-
 
 
 <div class="why-grid">
@@ -672,15 +494,11 @@ id="bestSellingProducts">
 <i class="fa-solid fa-truck"></i>
 
 <h3>
-
 توصيل سريع
-
 </h3>
 
 <p>
-
-نوصل طلباتك لجميع ولايات الجزائر
-
+توصيل لجميع ولايات الجزائر
 </p>
 
 </div>
@@ -692,15 +510,11 @@ id="bestSellingProducts">
 <i class="fa-solid fa-money-bill-wave"></i>
 
 <h3>
-
 الدفع عند الاستلام
-
 </h3>
 
 <p>
-
-ادفع بعد وصول المنتج إليك
-
+ادفع بعد استلام طلبك
 </p>
 
 </div>
@@ -712,15 +526,11 @@ id="bestSellingProducts">
 <i class="fa-solid fa-shield-halved"></i>
 
 <h3>
-
-منتجات مضمونة
-
+منتجات موثوقة
 </h3>
 
 <p>
-
 اختيار منتجات بجودة عالية
-
 </p>
 
 </div>
@@ -732,15 +542,11 @@ id="bestSellingProducts">
 <i class="fa-solid fa-headset"></i>
 
 <h3>
-
-خدمة الزبائن
-
+خدمة العملاء
 </h3>
 
 <p>
-
 نحن معك قبل وبعد الشراء
-
 </p>
 
 </div>
@@ -748,49 +554,82 @@ id="bestSellingProducts">
 
 </div>
 
-
 </div>
 
 </section>
 
 
 
-<!--==================================
-        NEWSLETTER
-===================================-->
 
-<section class="newsletter">
+<!--=============================
+        CUSTOMER REVIEWS
+==============================-->
+
+<section class="reviews">
 
 <div class="container">
 
 
 <h2>
-
-اشترك ليصلك كل جديد
-
+آراء العملاء
 </h2>
 
 
+
+<div class="review-grid">
+
+
+<div class="review-card">
+
+<div class="stars">
+⭐⭐⭐⭐⭐
+</div>
+
 <p>
-
-عروض وتخفيضات خاصة
-
+خدمة ممتازة والطلب وصل في الوقت.
 </p>
 
+<h4>
+محمد - الجزائر
+</h4>
 
-<div class="newsletter-box">
-
-
-<input 
-type="email"
-placeholder="أدخل بريدك الإلكتروني">
+</div>
 
 
-<button>
 
-اشتراك
+<div class="review-card">
 
-</button>
+<div class="stars">
+⭐⭐⭐⭐⭐
+</div>
+
+<p>
+منتجات جميلة والأسعار مناسبة.
+</p>
+
+<h4>
+سارة - وهران
+</h4>
+
+</div>
+
+
+
+<div class="review-card">
+
+<div class="stars">
+⭐⭐⭐⭐
+</div>
+
+<p>
+تجربة شراء رائعة وسأطلب مرة أخرى.
+</p>
+
+<h4>
+أمين - قسنطينة
+</h4>
+
+</div>
 
 
 </div>
@@ -802,13 +641,27 @@ placeholder="أدخل بريدك الإلكتروني">
 
 
 
-</main>
+
+<!--=============================
+        WHATSAPP BUTTON
+==============================-->
+
+<a 
+class="whatsapp-btn"
+href="https://wa.me/213778196483"
+target="_blank">
+
+<i class="fa-brands fa-whatsapp"></i>
+
+</a>
 
 
 
-<!--==================================
+
+
+<!--=============================
         FOOTER
-===================================-->
+==============================-->
 
 <footer class="footer">
 
@@ -816,162 +669,78 @@ placeholder="أدخل بريدك الإلكتروني">
 <div class="container">
 
 
-<div class="footer-grid">
+<div class="footer-content">
 
 
-<div class="footer-about">
 
+<div>
 
-<img src="assets/logo/logo.png">
+<img src="assets/logo/logo.png"
+class="footer-logo">
 
 
 <h3>
-
 Bouras.shop_dz
-
 </h3>
 
 
 <p>
-
-متجر إلكتروني جزائري يوفر الملابس والأحذية والعطور والإكسسوارات والألعاب مع خدمة الدفع عند الاستلام.
-
+متجر إلكتروني جزائري للملابس والأحذية والعطور والإكسسوارات.
 </p>
-
 
 </div>
 
 
 
-<div class="footer-links">
 
+<div>
 
 <h3>
-
-روابط مهمة
-
+روابط
 </h3>
 
-
-<a href="about.html">
-
-من نحن
-
+<a href="index.html">
+الرئيسية
 </a>
 
+<a href="shop.html">
+المتجر
+</a>
+
+<a href="cart.html">
+السلة
+</a>
 
 <a href="contact.html">
-
 اتصل بنا
-
 </a>
-
-
-<a href="privacy.html">
-
-سياسة الخصوصية
-
-</a>
-
-
-<a href="terms.html">
-
-الشروط والأحكام
-
-</a>
-
 
 </div>
 
 
 
-<div class="footer-links">
 
-
-<h3>
-
-الأقسام
-
-</h3>
-
-
-<a href="category/clothes.html">
-
-الملابس
-
-</a>
-
-
-<a href="category/shoes.html">
-
-الأحذية
-
-</a>
-
-
-<a href="category/perfumes.html">
-
-العطور
-
-</a>
-
-
-<a href="category/games.html">
-
-الألعاب
-
-</a>
-
-
-</div>
-
-
-
-<div class="footer-contact">
-
+<div>
 
 <h3>
-
-تواصل معنا
-
+تابعنا
 </h3>
-
-
-<p>
-
-📞 الهاتف0778196483:0
-
-</p>
-
-
-<p>
-
-📍 الجزائر
-
-</p>
 
 
 <div class="social">
 
-
 <a href="#">
-
 <i class="fa-brands fa-facebook"></i>
-
 </a>
 
 
 <a href="#">
-
 <i class="fa-brands fa-instagram"></i>
-
 </a>
 
 
 <a href="#">
-
-<i class="fa-brands fa-whatsapp"></i>
-
+<i class="fa-brands fa-tiktok"></i>
 </a>
 
 
@@ -981,14 +750,14 @@ Bouras.shop_dz
 </div>
 
 
+
 </div>
+
 
 
 <div class="copyright">
 
-
-© 2026 Bouras.shop_dz - جميع الحقوق محفوظة
-
+© 2026 Bouras.shop_dz جميع الحقوق محفوظة
 
 </div>
 
@@ -997,20 +766,8 @@ Bouras.shop_dz
 
 
 </footer>
-
-
-
-<!--==================================
-        SCRIPTS
-===================================-->
-
-
 <script src="js/main.js"></script>
-
-
-<script type="module" src="js/products.js"></script>
-
+<script src="js/products.js"></script>
 
 </body>
-
 </html>
