@@ -1,27 +1,35 @@
 /*==================================
-        BOURAS.SHOP_DZ
-        MAIN JAVASCRIPT
-===================================*/
+   BOURAS.SHOP_DZ
+   MAIN JAVASCRIPT
+==================================*/
 
 
 //==============================
 // SIDE MENU
 //==============================
 
+
 const menuBtn = document.getElementById("menuBtn");
+
 const sideMenu = document.querySelector(".side-menu");
+
 const overlay = document.querySelector(".overlay");
+
 
 
 if(menuBtn){
 
-    menuBtn.addEventListener("click",()=>{
 
-        sideMenu.classList.add("active");
+menuBtn.onclick = ()=>{
 
-        overlay.classList.add("active");
 
-    });
+sideMenu.classList.add("active");
+
+overlay.classList.add("active");
+
+
+};
+
 
 }
 
@@ -29,108 +37,210 @@ if(menuBtn){
 
 if(overlay){
 
-    overlay.addEventListener("click",()=>{
 
-        sideMenu.classList.remove("active");
+overlay.onclick = ()=>{
 
-        overlay.classList.remove("active");
 
-    });
+sideMenu.classList.remove("active");
+
+overlay.classList.remove("active");
+
+
+};
+
 
 }
 
 
 
 //==============================
-// CLOSE MENU LINKS
+// HERO SLIDER
 //==============================
 
-document.querySelectorAll(".side-menu a")
-.forEach(link=>{
 
-    link.addEventListener("click",()=>{
+let slides = document.querySelectorAll(".slide");
 
-        sideMenu.classList.remove("active");
+let currentSlide = 0;
 
-        overlay.classList.remove("active");
 
-    });
+
+function changeSlide(){
+
+
+slides.forEach(slide=>{
+
+slide.classList.remove("active");
 
 });
 
 
+if(slides.length){
+
+
+slides[currentSlide].classList.add("active");
+
+
+currentSlide++;
+
+
+if(currentSlide >= slides.length){
+
+currentSlide = 0;
+
+}
+
+
+}
+
+
+}
+
+
+
+if(slides.length){
+
+
+setInterval(changeSlide,5000);
+
+
+}
+
+
 
 
 
 //==============================
-// CART COUNT
+// CART SYSTEM
 //==============================
+
+
+let cart = JSON.parse(
+localStorage.getItem("cart")
+) || [];
+
+
+
+
+function addToCart(id){
+
+
+cart.push(id);
+
+
+localStorage.setItem(
+"cart",
+JSON.stringify(cart)
+);
+
+
+
+updateCartCount();
+
+
+
+alert("تمت إضافة المنتج إلى السلة 🛒");
+
+
+}
+
+
+
 
 
 function updateCartCount(){
 
 
-    let cart =
-    JSON.parse(localStorage.getItem("cart"))
-    || [];
+const count =
+document.getElementById("cartCount");
 
 
-    let count = 0;
+if(count){
 
 
-    cart.forEach(item=>{
-
-        count += item.quantity || 1;
-
-    });
-
-
-
-    let cartElement =
-    document.getElementById("cartCount");
-
-
-    if(cartElement){
-
-        cartElement.textContent=count;
-
-    }
+count.innerHTML = cart.length;
 
 
 }
 
 
 
+}
+
+
+
+updateCartCount();
+
+
 
 
 //==============================
-// FAVORITES COUNT
+// FAVORITES
 //==============================
+
+
+let favorites =
+JSON.parse(
+localStorage.getItem("favorites")
+) || [];
+
+
+
+
+
+function addFavorite(id){
+
+
+if(!favorites.includes(id)){
+
+
+favorites.push(id);
+
+
+localStorage.setItem(
+"favorites",
+JSON.stringify(favorites)
+);
+
+
+alert("تمت الإضافة إلى المفضلة ❤️");
+
+
+}
+
+
+updateFavoriteCount();
+
+
+}
+
+
+
 
 
 function updateFavoriteCount(){
 
 
-    let favorites =
-    JSON.parse(localStorage.getItem("favorites"))
-    || [];
+const count =
+document.getElementById("favoriteCount");
 
 
 
-    let favoriteElement =
-    document.getElementById("favoriteCount");
+if(count){
 
 
-
-    if(favoriteElement){
-
-        favoriteElement.textContent =
-        favorites.length;
-
-    }
+count.innerHTML =
+favorites.length;
 
 
 }
+
+
+}
+
+
+
+updateFavoriteCount();
+
 
 
 
@@ -141,80 +251,90 @@ function updateFavoriteCount(){
 //==============================
 
 
-const searchInput =
-document.getElementById("searchInput");
+function searchProducts(value){
+
+
+let text =
+value.toLowerCase();
 
 
 
-if(searchInput){
-
-
-searchInput.addEventListener("keyup",(e)=>{
-
-
-    let value =
-    e.target.value.toLowerCase();
+let cards =
+document.querySelectorAll(".product-card");
 
 
 
-    let products =
-    document.querySelectorAll(".product-card");
+cards.forEach(card=>{
+
+
+let name =
+card.querySelector("h3")
+.innerText
+.toLowerCase();
 
 
 
-    products.forEach(product=>{
+if(name.includes(text)){
 
 
-        let title =
-        product
-        .querySelector(".product-title")
-        ?.textContent
-        .toLowerCase();
+card.style.display="block";
 
 
-
-        if(title){
-
-            if(title.includes(value)){
-
-                product.style.display="block";
-
-            }
-
-            else{
-
-                product.style.display="none";
-
-            }
-
-        }
+}else{
 
 
+card.style.display="none";
 
-    });
+
+}
 
 
 
 });
+
 
 }
 
 
 
 
-
 //==============================
-// INITIAL LOAD
+// SMOOTH SCROLL
 //==============================
 
 
-document.addEventListener("DOMContentLoaded",()=>{
+document.querySelectorAll("a[href^='#']")
+.forEach(link=>{
 
 
-    updateCartCount();
+link.onclick=function(e){
 
 
-    updateFavoriteCount();
+let target =
+document.querySelector(
+this.getAttribute("href")
+);
+
+
+
+if(target){
+
+
+e.preventDefault();
+
+
+target.scrollIntoView({
+
+behavior:"smooth"
+
+});
+
+
+}
+
+
+
+};
 
 
 });
