@@ -1,26 +1,46 @@
- /*==================================
-    BOURAS.SHOP_DZ
-    SINGLE PRODUCT SYSTEM
+/*==================================
+   BOURAS.SHOP_DZ
+   PREMIUM PRODUCT PAGE SYSTEM
 ==================================*/
 
 
-// جلب المنتجات
+let products = [];
 
-let products = JSON.parse(
-    localStorage.getItem("products")
-) || [];
-
-
-
-// جلب id من الرابط
-
-const urlParams = new URLSearchParams(
-    window.location.search
+let productId = Number(
+new URLSearchParams(window.location.search)
+.get("id")
 );
 
-const productId = Number(
-    urlParams.get("id")
-);
+
+
+
+// تحميل المنتجات
+
+async function getProducts(){
+
+try{
+
+let response = await fetch("data/products.json");
+
+products = await response.json();
+
+
+loadProduct();
+
+loadSimilar();
+
+
+}
+
+catch(error){
+
+console.log(error);
+
+}
+
+
+}
+
 
 
 
@@ -30,15 +50,17 @@ const productId = Number(
 function loadProduct(){
 
 
-const box = document.getElementById("productBox");
+const box =
+document.getElementById("productBox");
 
 
-if(!box) return;
+if(!box)return;
 
 
 
-const product = products.find(
-item => item.id === productId
+let product =
+products.find(
+p=>p.id===productId
 );
 
 
@@ -46,7 +68,7 @@ item => item.id === productId
 if(!product){
 
 
-box.innerHTML = `
+box.innerHTML=`
 
 <div class="products-empty">
 
@@ -54,13 +76,9 @@ box.innerHTML = `
 المنتج غير موجود
 </h2>
 
-
 <a href="index.html">
-
-العودة للرئيسية
-
+العودة
 </a>
-
 
 </div>
 
@@ -74,19 +92,18 @@ return;
 
 
 
-box.innerHTML = `
+box.innerHTML=`
 
 
 <div class="product-gallery">
 
 
-<img src="${product.image}"
-alt="${product.name}">
+<img 
+src="${product.image}"
+loading="lazy">
 
 
 </div>
-
-
 
 
 
@@ -95,7 +112,7 @@ alt="${product.name}">
 
 <span class="category">
 
-${product.category || "منتج"}
+${product.category}
 
 </span>
 
@@ -109,21 +126,42 @@ ${product.name}
 
 
 
+<div class="stars">
 
-<div class="big-price">
-
-${product.price} دج
+⭐⭐⭐⭐⭐
 
 </div>
 
 
 
-<p class="description">
 
-${product.description || 
-"منتج ذو جودة عالية من Bouras.shop_dz"}
+<div class="price-area">
+
+
+${product.oldPrice ? 
+`<del>${product.oldPrice} دج</del>`
+:""}
+
+
+<strong>
+
+${product.price} دج
+
+</strong>
+
+
+</div>
+
+
+
+
+
+<p>
+
+${product.description}
 
 </p>
+
 
 
 
@@ -136,9 +174,12 @@ ${product.description ||
 </button>
 
 
-<input id="quantity"
+
+<input 
+id="quantity"
 value="1"
 readonly>
+
 
 
 <button onclick="changeQty(1)">
@@ -146,17 +187,18 @@ readonly>
 </button>
 
 
+
 </div>
 
 
 
 
-<button class="add-cart-btn"
-onclick="addProductToCart(${product.id})">
 
+<button 
+class="add-cart-btn"
+onclick="addProductToCart()">
 
-🛒 أضف إلى السلة
-
+🛒 أضف للسلة
 
 </button>
 
@@ -164,14 +206,15 @@ onclick="addProductToCart(${product.id})">
 
 
 
-<a class="whatsapp-order"
-href="https://wa.me/213778196483?text=أريد طلب ${product.name}"
-target="_blank">
+<a 
+class="whatsapp-order"
+target="_blank"
+href="https://wa.me/213778196483?text=أريد طلب ${product.name}">
 
 
 <i class="fa-brands fa-whatsapp"></i>
 
-اطلب عبر واتساب
+طلب عبر واتساب
 
 
 </a>
@@ -179,7 +222,6 @@ target="_blank">
 
 
 </div>
-
 
 
 `;
@@ -190,7 +232,9 @@ target="_blank">
 
 
 
-// تغيير الكمية
+
+
+// الكمية
 
 function changeQty(value){
 
@@ -203,23 +247,21 @@ let qty =
 Number(input.value);
 
 
-
 qty += value;
 
 
 
-if(qty < 1){
-
-qty = 1;
-
-}
+if(qty<1)
+qty=1;
 
 
 
-input.value = qty;
+input.value=qty;
 
 
 }
+
+
 
 
 
@@ -227,27 +269,36 @@ input.value = qty;
 
 // إضافة للسلة
 
-function addProductToCart(id){
+function addProductToCart(){
+
+
+
+let product =
+products.find(
+p=>p.id===productId
+);
 
 
 
 let cart =
 JSON.parse(
 localStorage.getItem("cart")
-) || [];
+)||[];
 
 
 
-let quantity =
+
+let qty =
 Number(
 document.getElementById("quantity").value
 );
 
 
 
+
 let old =
 cart.find(
-item=>item.id===id
+item=>item.id===product.id
 );
 
 
@@ -255,22 +306,32 @@ item=>item.id===id
 if(old){
 
 
-old.qty += quantity;
+old.qty += qty;
 
 
-}else{
+}
+
+else{
 
 
 cart.push({
 
-id:id,
+id:product.id,
 
-qty:quantity
+name:product.name,
+
+image:product.image,
+
+price:product.price,
+
+qty:qty
+
 
 });
 
 
 }
+
 
 
 
@@ -285,11 +346,6 @@ JSON.stringify(cart)
 alert("تمت إضافة المنتج للسلة 🛒");
 
 
-
-updateCartCount();
-
-
-
 }
 
 
@@ -301,18 +357,21 @@ updateCartCount();
 function loadSimilar(){
 
 
-const box =
-document.getElementById("similarProducts");
+let box =
+document.getElementById(
+"similarProducts"
+);
 
 
-if(!box) return;
+
+if(!box)return;
 
 
 
 products
 .filter(p=>p.id!==productId)
 .slice(0,4)
-.forEach(product=>{
+.forEach(p=>{
 
 
 box.innerHTML += `
@@ -321,26 +380,26 @@ box.innerHTML += `
 <div class="product-card">
 
 
-<img src="${product.image}">
+<img 
+src="${p.image}"
+loading="lazy">
 
 
 <h3>
-
-${product.name}
-
+${p.name}
 </h3>
 
 
 <div class="price">
 
-${product.price} دج
+${p.price} دج
 
 </div>
 
 
-<a href="product.html?id=${product.id}">
+<a href="product.html?id=${p.id}">
 
-عرض المنتج
+مشاهدة
 
 </a>
 
@@ -359,13 +418,8 @@ ${product.price} دج
 
 
 
+
 document.addEventListener(
 "DOMContentLoaded",
-()=>{
-
-loadProduct();
-
-loadSimilar();
-
-}
+getProducts
 );
