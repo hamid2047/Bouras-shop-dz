@@ -92,7 +92,8 @@
 <input
 type="text"
 placeholder="ابحث عن منتج..."
-id="searchInput">
+id="searchInput"
+onkeyup="searchProducts(this.value)">
 
 <button>
 
@@ -159,6 +160,16 @@ Bouras.shop_dz
 </h2>
 
 </div>
+
+<li>
+
+<a href="admin.html">
+
+⚙️ لوحة الإدارة
+
+</a>
+
+</li>
 
 <ul>
 
@@ -537,10 +548,8 @@ Bouras.shop_dz
 id="latestProducts">
 
 <!--
-
-سيتم جلب المنتجات تلقائياً
-من Firebase
-
+سيتم جلب المنتجات من قاعدة المنتجات المحلية
+-->
 -->
 
 </div>
@@ -579,13 +588,11 @@ id="latestProducts">
 
 id="bestSellingProducts">
 
-<!-- Firebase -->
+<!-- Products System -->
 
 </div>
 
 </div>
-
-</section>
 
 </section>
 
@@ -619,7 +626,7 @@ id="bestSellingProducts">
 
 <div class="products-grid" id="offersProducts">
 
-<!-- سيتم جلب العروض من Firebase -->
+<!-- سيتم جلب العروض من ملف المنتجات -->
 
 </div>
 
@@ -932,7 +939,7 @@ Bouras.shop_dz
 
 <p>
 
-📞 الهاتف: 0000000000
+📞 الهاتف0778196483:0
 
 </p>
 
@@ -1000,7 +1007,6 @@ Bouras.shop_dz
 
 <script src="js/main.js"></script>
 
-<script type="module" src="js/firebase.js"></script>
 
 <script type="module" src="js/products.js"></script>
 
