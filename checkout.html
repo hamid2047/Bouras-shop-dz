@@ -6,15 +6,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>إتمام الطلب | Bouras.shop_dz</title>
-
+<title>تأكيد الطلب | Bouras.shop_dz</title>
 
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/checkout.css">
 
-
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
-
 
 </head>
 
@@ -22,25 +19,15 @@
 <body>
 
 
-
 <header class="header">
 
 <div class="container">
 
-
-<a href="index.html">
-
 <img src="assets/logo/logo.png" width="120">
 
-</a>
-
-
 <h2>
-
-إتمام الطلب
-
+تأكيد الطلب
 </h2>
-
 
 </div>
 
@@ -48,6 +35,8 @@
 
 
 
+
+<main>
 
 
 <section class="checkout">
@@ -62,97 +51,63 @@
 
 
 <h2>
-
-معلومات الزبون
-
+بيانات الزبون
 </h2>
 
 
 
-<input 
-id="name"
-type="text"
-placeholder="الاسم الكامل">
+<input id="name" placeholder="الاسم الكامل">
 
 
 
-<input 
-id="phone"
-type="tel"
-placeholder="رقم الهاتف">
+<input id="phone" placeholder="رقم الهاتف">
 
 
 
 <select id="wilaya">
 
 <option>
-
 اختر الولاية
-
 </option>
 
 <option>
-
 الجزائر
-
 </option>
 
 <option>
-
 وهران
-
 </option>
 
 <option>
-
 قسنطينة
-
 </option>
 
 <option>
-
 سطيف
-
 </option>
 
 <option>
-
 البليدة
-
 </option>
 
 </select>
 
 
 
-
-<textarea
-id="address"
-placeholder="العنوان بالتفصيل">
-</textarea>
+<textarea id="address"
+placeholder="العنوان الكامل"></textarea>
 
 
 
 
-<div class="order-total">
-
-المجموع:
-
-<strong id="checkoutTotal">
-
-0 دج
-
-</strong>
-
-
-</div>
+<textarea id="note"
+placeholder="ملاحظات إضافية"></textarea>
 
 
 
+<button onclick="sendOrder()">
 
-<button id="sendOrder">
-
-تأكيد الطلب عبر واتساب
+إرسال الطلب عبر واتساب
 
 </button>
 
@@ -167,6 +122,8 @@ placeholder="العنوان بالتفصيل">
 
 </section>
 
+
+</main>
 
 
 
