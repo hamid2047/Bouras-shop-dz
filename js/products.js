@@ -1,47 +1,31 @@
 /*==================================
    BOURAS.SHOP_DZ
    PREMIUM PRODUCT PAGE SYSTEM
+   LOCAL STORAGE VERSION
 ==================================*/
 
 
 let products = [];
 
 let productId = Number(
-new URLSearchParams(window.location.search)
-.get("id")
+    new URLSearchParams(window.location.search).get("id")
 );
 
 
+// تحميل المنتجات من لوحة الإدارة
+
+function getProducts(){
+
+    products = JSON.parse(
+        localStorage.getItem("products")
+    ) || [];
 
 
-// تحميل المنتجات
+    loadProduct();
 
-async function getProducts(){
-
-try{
-
-let response = await fetch("data/products.json");
-
-products = await response.json();
-
-
-loadProduct();
-
-loadSimilar();
-
+    loadSimilar();
 
 }
-
-catch(error){
-
-console.log(error);
-
-}
-
-
-}
-
-
 
 
 
@@ -49,220 +33,164 @@ console.log(error);
 
 function loadProduct(){
 
+    const box = document.getElementById("productBox");
 
-const box =
-document.getElementById("productBox");
-
-
-if(!box)return;
+    if(!box) return;
 
 
-
-let product =
-products.find(
-p=>p.id===productId
-);
+    let product = products.find(
+        p => p.id === productId
+    );
 
 
+    if(!product){
 
-if(!product){
+        box.innerHTML = `
+
+        <div class="products-empty">
+
+        <h2>
+        المنتج غير موجود
+        </h2>
+
+        <a href="index.html">
+        العودة للرئيسية
+        </a>
+
+        </div>
+
+        `;
+
+        return;
+    }
 
 
-box.innerHTML=`
 
-<div class="products-empty">
+    box.innerHTML = `
 
-<h2>
-المنتج غير موجود
-</h2>
+    <div class="product-gallery">
 
-<a href="index.html">
-العودة
-</a>
+        <img src="${product.image}"
+        alt="${product.name}">
 
-</div>
+    </div>
 
-`;
 
-return;
+
+    <div class="product-info-page">
+
+
+        <span class="category">
+        ${product.category || "منتج"}
+        </span>
+
+
+
+        <h1>
+        ${product.name}
+        </h1>
+
+
+
+        <div class="stars">
+        ⭐⭐⭐⭐⭐
+        </div>
+
+
+
+        <div class="price-area">
+
+        <strong>
+        ${product.price} دج
+        </strong>
+
+        </div>
+
+
+
+        <p>
+
+        ${product.description || 
+        "منتج عالي الجودة من Bouras.shop_dz"}
+
+        </p>
+
+
+
+
+        <div class="quantity-box">
+
+            <button onclick="changeQty(-1)">
+            -
+            </button>
+
+
+            <input id="quantity"
+            value="1"
+            readonly>
+
+
+            <button onclick="changeQty(1)">
+            +
+            </button>
+
+        </div>
+
+
+
+        <button 
+        class="add-cart-btn"
+        onclick="addProductToCart()">
+
+        🛒 أضف للسلة
+
+        </button>
+
+
+
+
+        <a class="whatsapp-order"
+
+        href="https://wa.me/213778196483?text=أريد طلب ${product.name}"
+
+        target="_blank">
+
+        💬 طلب عبر واتساب
+
+        </a>
+
+
+
+    </div>
+
+    `;
 
 }
 
 
 
-
-
-box.innerHTML=`
-
-
-<div class="product-gallery">
-
-
-<img 
-src="${product.image}"
-loading="lazy">
-
-
-</div>
-
-
-
-<div class="product-info-page">
-
-
-<span class="category">
-
-${product.category}
-
-</span>
-
-
-
-<h1>
-
-${product.name}
-
-</h1>
-
-
-
-<div class="stars">
-
-⭐⭐⭐⭐⭐
-
-</div>
-
-
-
-
-<div class="price-area">
-
-
-${product.oldPrice ? 
-`<del>${product.oldPrice} دج</del>`
-:""}
-
-
-<strong>
-
-${product.price} دج
-
-</strong>
-
-
-</div>
-
-
-
-
-
-<p>
-
-${product.description}
-
-</p>
-
-
-
-
-
-<div class="quantity-box">
-
-
-<button onclick="changeQty(-1)">
--
-</button>
-
-
-
-<input 
-id="quantity"
-value="1"
-readonly>
-
-
-
-<button onclick="changeQty(1)">
-+
-</button>
-
-
-
-</div>
-
-
-
-
-
-<button 
-class="add-cart-btn"
-onclick="addProductToCart()">
-
-🛒 أضف للسلة
-
-</button>
-
-
-
-
-
-<a 
-class="whatsapp-order"
-target="_blank"
-href="https://wa.me/213778196483?text=أريد طلب ${product.name}">
-
-
-<i class="fa-brands fa-whatsapp"></i>
-
-طلب عبر واتساب
-
-
-</a>
-
-
-
-</div>
-
-
-`;
-
-
-
-}
-
-
-
-
-
-// الكمية
+// تغيير الكمية
 
 function changeQty(value){
 
-
-let input =
-document.getElementById("quantity");
-
-
-let qty =
-Number(input.value);
+    let input =
+    document.getElementById("quantity");
 
 
-qty += value;
+    let qty =
+    Number(input.value);
 
 
-
-if(qty<1)
-qty=1;
+    qty += value;
 
 
+    if(qty < 1)
+    qty = 1;
 
-input.value=qty;
 
+    input.value = qty;
 
 }
-
-
-
 
 
 
@@ -272,145 +200,135 @@ input.value=qty;
 function addProductToCart(){
 
 
-
-let product =
-products.find(
-p=>p.id===productId
-);
-
+    let product =
+    products.find(
+        p => p.id === productId
+    );
 
 
-let cart =
-JSON.parse(
-localStorage.getItem("cart")
-)||[];
+    let cart =
+    JSON.parse(
+        localStorage.getItem("cart")
+    ) || [];
 
 
 
-
-let qty =
-Number(
-document.getElementById("quantity").value
-);
-
+    let qty =
+    Number(
+        document.getElementById("quantity").value
+    );
 
 
 
-let old =
-cart.find(
-item=>item.id===product.id
-);
+    let old =
+    cart.find(
+        item => item.id === product.id
+    );
 
 
 
-if(old){
+    if(old){
+
+        old.qty += qty;
+
+    }
+
+    else{
 
 
-old.qty += qty;
+        cart.push({
+
+            id:product.id,
+
+            name:product.name,
+
+            image:product.image,
+
+            price:product.price,
+
+            qty:qty
+
+        });
 
 
-}
-
-else{
-
-
-cart.push({
-
-id:product.id,
-
-name:product.name,
-
-image:product.image,
-
-price:product.price,
-
-qty:qty
-
-
-});
-
-
-}
+    }
 
 
 
+    localStorage.setItem(
+        "cart",
+        JSON.stringify(cart)
+    );
 
 
-localStorage.setItem(
-"cart",
-JSON.stringify(cart)
-);
-
-
-
-alert("تمت إضافة المنتج للسلة 🛒");
-
+    alert("تمت إضافة المنتج للسلة 🛒");
 
 }
 
 
 
 
-
-// منتجات مشابهة
+// المنتجات المشابهة
 
 function loadSimilar(){
 
 
-let box =
-document.getElementById(
-"similarProducts"
-);
+    const box =
+    document.getElementById("similarProducts");
+
+
+    if(!box) return;
 
 
 
-if(!box)return;
+    box.innerHTML="";
 
 
 
-products
-.filter(p=>p.id!==productId)
-.slice(0,4)
-.forEach(p=>{
+    products
+    .filter(
+        p => p.id !== productId
+    )
+    .slice(0,4)
+    .forEach(p=>{
 
 
-box.innerHTML += `
+        box.innerHTML += `
 
 
-<div class="product-card">
+        <div class="product-card">
 
 
-<img 
-src="${p.image}"
-loading="lazy">
+        <img src="${p.image}">
 
 
-<h3>
-${p.name}
-</h3>
+        <h3>
+        ${p.name}
+        </h3>
 
 
-<div class="price">
+        <div class="price">
 
-${p.price} دج
+        ${p.price} دج
 
-</div>
-
-
-<a href="product.html?id=${p.id}">
-
-مشاهدة
-
-</a>
+        </div>
 
 
-</div>
+
+        <a href="product.html?id=${p.id}">
+
+        مشاهدة المنتج
+
+        </a>
 
 
-`;
+        </div>
 
 
-});
+        `;
+
+
+    });
 
 
 }
