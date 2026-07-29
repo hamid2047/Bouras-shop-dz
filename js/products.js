@@ -359,7 +359,6 @@ ${product.price} دج
 
 
 
-
 document.addEventListener(
 "DOMContentLoaded",
 ()=>{
