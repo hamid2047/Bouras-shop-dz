@@ -1,204 +1,127 @@
 /*==================================
-   BOURAS.SHOP_DZ
-   CHECKOUT SYSTEM
+ BOURAS.SHOP_DZ
+ CHECKOUT SYSTEM
 ==================================*/
 
 
-document.addEventListener("DOMContentLoaded",()=>{
-
-
-let cart =
-JSON.parse(
-localStorage.getItem("cart")
-) || [];
-
-
-
-const totalBox =
-document.getElementById("checkoutTotal");
-
-
-
-let total = 0;
-
-
-
-cart.forEach(item=>{
-
-total += Number(item.price) * Number(item.qty);
-
-});
-
-
-
-if(totalBox){
-
-totalBox.innerHTML =
-total + " دج";
-
-}
-
-
-
-
-
-const sendBtn =
-document.getElementById("sendOrder");
-
-
-
-if(sendBtn){
-
-
-sendBtn.onclick=function(){
-
+function sendOrder(){
 
 
 let name =
 document.getElementById("name").value;
 
 
-
 let phone =
 document.getElementById("phone").value;
-
 
 
 let wilaya =
 document.getElementById("wilaya").value;
 
 
-
 let address =
 document.getElementById("address").value;
 
 
+let note =
+document.getElementById("note").value;
+
+
+
+let cart =
+JSON.parse(localStorage.getItem("cart"))
+|| [];
 
 
 
 if(
 name==="" ||
 phone==="" ||
-wilaya==="اختر الولاية" ||
-address===""
+wilaya==="اختر الولاية"
 ){
 
-
-alert("يرجى ملء جميع المعلومات");
-
+alert("يرجى ملء المعلومات المطلوبة");
 
 return;
-
 
 }
 
 
 
-
-
 let message =
-
-`
-🛒 طلب جديد من Bouras.shop_dz
-
-👤 الاسم:
-${name}
-
-📞 الهاتف:
-${phone}
-
-📍 الولاية:
-${wilaya}
-
-🏠 العنوان:
-${address}
+"🛒 طلب جديد من Bouras.shop_dz%0A%0A";
 
 
-📦 المنتجات:
 
-`;
+message +=
+"👤 الاسم: "+name+
+"%0A";
 
 
+message +=
+"📞 الهاتف: "+phone+
+"%0A";
+
+
+message +=
+"📍 الولاية: "+wilaya+
+"%0A";
+
+
+message +=
+"🏠 العنوان: "+address+
+"%0A";
+
+
+
+message +=
+"📦 المنتجات:%0A";
+
+
+
+let total=0;
 
 
 
 cart.forEach(item=>{
 
 
-message += `
+message +=
+"- "+
+item.name+
+" × "+
+item.qty+
+"%0A";
 
-- ${item.name}
 
-الكمية: ${item.qty}
-
-السعر:
-${item.price} دج
-
-`;
-
+total += item.price * item.qty;
 
 
 });
 
 
 
-
-
-message += `
-
-
-💰 المجموع:
-${total} دج
-
-
-شكرا لاختياركم Bouras.shop_dz
-`;
+message +=
+"%0A💰 المجموع: "+
+total+
+" دج";
 
 
 
-
-
-
-let whatsappNumber =
-"213778196483";
-
-
-
-
-
-let url =
-"https://wa.me/"
-+
-whatsappNumber
-+
-"?text="
-+
-encodeURIComponent(message);
-
-
-
+message +=
+"%0A📝 ملاحظة: "+
+note;
 
 
 
 window.open(
-url,
+
+"https://wa.me/213778196483?text="+message,
+
 "_blank"
+
 );
 
 
 
-
-
-localStorage.removeItem("cart");
-
-
-
-};
-
-
-
 }
-
-
-
-});
