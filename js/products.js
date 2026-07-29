@@ -1,158 +1,50 @@
 /*==================================
-        BOURAS.SHOP_DZ
-        PROFESSIONAL PRODUCT ENGINE
-===================================*/
+   BOURAS.SHOP_DZ
+   PRODUCTS DISPLAY SYSTEM
+==================================*/
 
 
-import PRODUCTS from "../data/products.js";
+// جلب المنتجات من التخزين
 
-import CONFIG from "./config.js";
-
-
-
-// العناصر
-
-const latestContainer =
-document.getElementById("latestProducts");
-
-const bestContainer =
-document.getElementById("bestSellingProducts");
-
-const offersContainer =
-document.getElementById("offersProducts");
-
+let products =
+JSON.parse(localStorage.getItem("products"))
+|| [];
 
 
 
 
 // عرض المنتجات
 
-function renderProducts(container, products){
+function displayProducts(){
 
 
-    if(!container) return;
+const container =
+document.getElementById("latestProducts");
 
 
-    container.innerHTML="";
 
+if(!container) return;
 
 
-    products.forEach(product=>{
 
+container.innerHTML="";
 
-        const card = document.createElement("div");
 
 
-        card.className="product-card";
+if(products.length === 0){
 
 
+container.innerHTML = `
 
-        card.innerHTML = `
+<div class="empty">
 
+لا توجد منتجات حاليا
 
-        <div class="product-image">
+</div>
 
+`;
 
-            <img src="${product.image || CONFIG.defaultImage}"
-            alt="${product.name}">
-
-
-            ${
-                product.offer ?
-
-                `<span class="discount">
-                عرض
-                </span>`
-
-                :
-
-                ""
-
-            }
-
-
-            <button class="favorite-btn"
-            onclick="addFavorite(${product.id})">
-
-            ♡
-
-            </button>
-
-
-        </div>
-
-
-
-
-        <div class="product-info">
-
-
-            <span class="category">
-
-            ${product.category}
-
-            </span>
-
-
-
-            <h3>
-
-            ${product.name}
-
-            </h3>
-
-
-
-
-            <div class="price">
-
-
-            ${
-            product.oldPrice ?
-
-            `<del>
-            ${product.oldPrice} ${CONFIG.currency}
-            </del>`
-
-            :
-
-            ""
-
-            }
-
-
-            <strong>
-
-            ${product.price}
-            ${CONFIG.currency}
-
-            </strong>
-
-
-            </div>
-
-
-
-
-            <button 
-            onclick="addToCart(${product.id})">
-
-            🛒 أضف للسلة
-
-            </button>
-
-
-        </div>
-
-
-        `;
-
-
-
-        container.appendChild(card);
-
-
-    });
+return;
 
 
 }
@@ -160,254 +52,83 @@ function renderProducts(container, products){
 
 
 
+products.forEach(product=>{
 
 
-// تحميل الأقسام
+container.innerHTML += `
 
-function loadProducts(){
 
+<div class="product-card">
 
 
-renderProducts(
-latestContainer,
-PRODUCTS
-);
+<div class="product-image">
 
 
+<img src="${product.image}">
 
-renderProducts(
-bestContainer,
-PRODUCTS.slice(0,6)
-);
 
+<button onclick="addFavorite(${product.id})">
 
+♡
 
-renderProducts(
-offersContainer,
-PRODUCTS.filter(
-item=>item.offer
-)
-);
+</button>
 
 
+</div>
 
-}
 
 
+<h3>
 
+${product.name}
 
+</h3>
 
-// البحث
 
-window.searchProducts=function(value){
 
+<p>
 
+${product.category}
 
-const result =
-PRODUCTS.filter(product=>
+</p>
 
-product.name
-.includes(value)
 
-);
 
+<div class="price">
 
+${product.price} دج
 
-renderProducts(
-latestContainer,
-result
-);
+</div>
 
 
 
-};
+<button onclick="addToCart(${product.id})">
 
+🛒 أضف للسلة
 
+</button>
 
 
 
+</div>
 
 
-// السلة
+`;
 
-window.addToCart=function(id){
 
-
-
-let cart =
-JSON.parse(
-localStorage.getItem("cart")
-)
-|| [];
-
-
-
-const product =
-PRODUCTS.find(
-item=>item.id===id
-);
-
-
-
-if(!product)return;
-
-
-
-
-const old =
-cart.find(
-item=>item.id===id
-);
-
-
-
-if(old){
-
-
-old.quantity++;
-
-}
-
-else{
-
-
-cart.push({
-
-...product,
-
-quantity:1
 
 });
 
 
-}
-
-
-
-localStorage.setItem(
-"cart",
-JSON.stringify(cart)
-);
-
-
-
-updateCart();
-
-
-
-alert(
-"تمت إضافة المنتج للسلة"
-);
-
-
-
-};
-
-
-
-
-
-
-
-
-// تحديث عداد السلة
-
-function updateCart(){
-
-
-
-let cart =
-JSON.parse(
-localStorage.getItem("cart")
-)
-|| [];
-
-
-
-let count =
-cart.reduce(
-(a,b)=>a+b.quantity,
-0
-);
-
-
-
-const element =
-document.getElementById(
-"cartCount"
-);
-
-
-
-if(element)
-
-element.innerHTML=count;
-
-
 
 }
 
 
 
 
-
-
-
-
-
-// المفضلة
-
-window.addFavorite=function(id){
-
-
-
-let favorites =
-JSON.parse(
-localStorage.getItem("favorites")
-)
-|| [];
-
-
-
-if(!favorites.includes(id)){
-
-
-favorites.push(id);
-
-
-localStorage.setItem(
-"favorites",
-JSON.stringify(favorites)
-);
-
-
-
-alert(
-"تمت الإضافة للمفضلة"
-);
-
-
-}
-
-
-
-};
-
-
-
-
-
-
+// تشغيل
 
 document.addEventListener(
 "DOMContentLoaded",
-()=>{
-
-
-loadProducts();
-
-
-updateCart();
-
-
-});
+displayProducts
+);
