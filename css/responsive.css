@@ -1,0 +1,325 @@
+/*==================================
+        RESPONSIVE DESIGN
+        BOURAS.SHOP_DZ
+===================================*/
+
+
+/* LARGE SCREENS */
+
+@media(min-width:1400px){
+
+    .container{
+
+        max-width:1400px;
+
+    }
+
+
+    .products-grid{
+
+        grid-template-columns:
+        repeat(5,1fr);
+
+    }
+
+}
+
+
+
+/* LAPTOP */
+
+@media(max-width:1200px){
+
+
+    .slide h1{
+
+        font-size:36px;
+
+    }
+
+
+    .category-grid{
+
+        grid-template-columns:
+        repeat(4,1fr);
+
+    }
+
+
+    .products-grid{
+
+        grid-template-columns:
+        repeat(3,1fr);
+
+    }
+
+
+}
+
+
+
+/* TABLET */
+
+@media(max-width:992px){
+
+
+    .header .container{
+
+        gap:15px;
+
+    }
+
+
+
+    .header-icons{
+
+        gap:12px;
+
+    }
+
+
+
+    .slide{
+
+        padding:35px;
+
+    }
+
+
+
+    .slide h1{
+
+        font-size:30px;
+
+    }
+
+
+
+    .category-grid{
+
+        grid-template-columns:
+        repeat(3,1fr);
+
+    }
+
+
+
+    .footer-grid{
+
+        grid-template-columns:
+        repeat(2,1fr);
+
+    }
+
+
+}
+
+
+
+
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+
+    .top-bar .container{
+
+        flex-direction:column;
+
+        gap:5px;
+
+        text-align:center;
+
+    }
+
+
+
+    .header .container{
+
+        flex-wrap:wrap;
+
+    }
+
+
+
+    .logo{
+
+        order:1;
+
+    }
+
+
+
+    .header-icons{
+
+        order:2;
+
+    }
+
+
+
+    .search-box{
+
+        order:3;
+
+        width:100%;
+
+    }
+
+
+
+    .slide{
+
+        flex-direction:column;
+
+        text-align:center;
+
+    }
+
+
+
+    .slide-content{
+
+        width:100%;
+
+    }
+
+
+
+    .slide-image{
+
+        width:100%;
+
+    }
+
+
+
+    .category-grid{
+
+        grid-template-columns:
+        repeat(2,1fr);
+
+        gap:15px;
+
+    }
+
+
+
+    .products-grid{
+
+        grid-template-columns:
+        repeat(2,1fr);
+
+        gap:15px;
+
+    }
+
+
+
+    .product-title{
+
+        font-size:15px;
+
+    }
+
+
+
+    .new-price{
+
+        font-size:18px;
+
+    }
+
+
+
+    .section-header{
+
+        flex-direction:column;
+
+        gap:15px;
+
+        align-items:flex-start;
+
+    }
+
+
+
+}
+
+
+
+
+
+/* SMALL PHONES */
+
+@media(max-width:480px){
+
+
+    .container{
+
+        width:94%;
+
+    }
+
+
+
+    .logo img{
+
+        width:100px;
+
+    }
+
+
+
+    .header-icons a{
+
+        font-size:19px;
+
+    }
+
+
+
+    .category-grid{
+
+        grid-template-columns:
+        repeat(2,1fr);
+
+    }
+
+
+
+    .products-grid{
+
+        grid-template-columns:
+        1fr;
+
+    }
+
+
+
+    .product-image{
+
+        height:260px;
+
+    }
+
+
+
+    .side-menu{
+
+        width:280px;
+
+    }
+
+
+
+    .newsletter h2{
+
+        font-size:24px;
+
+    }
+
+
+
+}
