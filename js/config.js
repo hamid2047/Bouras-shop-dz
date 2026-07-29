@@ -1,18 +1,20 @@
 /*==================================
         BOURAS.SHOP_DZ
-        STORE CONFIG
+        STORE CONFIGURATION
 ===================================*/
 
 
-export const STORE = {
+const CONFIG = {
 
 
-    name:
-    "Bouras.shop_dz",
+    storeName: "Bouras.shop_dz",
 
 
-    currency:
-    "دج",
+    currency: "دج",
+
+
+    whatsapp:
+    "0000000000",
 
 
     delivery:
@@ -23,13 +25,52 @@ export const STORE = {
     "الدفع عند الاستلام",
 
 
-    whatsapp:
-    "",
-
-
     defaultImage:
-    "assets/images/default.png"
+    "assets/products/default.png",
 
 
+    categories: [
+
+        {
+            id:"clothes",
+            name:"الملابس",
+            icon:"👕"
+        },
+
+        {
+            id:"shoes",
+            name:"الأحذية",
+            icon:"👟"
+        },
+
+        {
+            id:"accessories",
+            name:"الإكسسوارات",
+            icon:"💍"
+        },
+
+        {
+            id:"cosmetics",
+            name:"مواد التجميل",
+            icon:"💄"
+        },
+
+        {
+            id:"perfumes",
+            name:"العطور",
+            icon:"🌹"
+        },
+
+        {
+            id:"games",
+            name:"الألعاب",
+            icon:"🎮"
+        }
+
+    ]
 
 };
+
+
+
+export default CONFIG;
