@@ -4,16 +4,18 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>
-Bouras.shop_dz | Admin
+Bouras.shop_dz | لوحة الإدارة
 </title>
 
 
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/admin.css">
 
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&display=swap" rel="stylesheet">
 
 
 </head>
@@ -22,54 +24,192 @@ Bouras.shop_dz | Admin
 <body>
 
 
-<section class="admin">
+<header class="admin-header">
 
-
-<div class="container">
-
+<div>
 
 <h1>
 ⚙️ لوحة إدارة Bouras.shop_dz
 </h1>
 
+<p>
+إدارة المنتجات بسهولة
+</p>
+
+</div>
 
 
-<div class="admin-box">
+<a href="index.html">
+العودة للمتجر 🛒
+</a>
 
 
-<input id="productName"
+</header>
+
+
+
+
+
+<main class="dashboard">
+
+
+
+<section class="stats">
+
+
+<div class="stat-card">
+
+<h2 id="productCount">
+0
+</h2>
+
+<p>
+عدد المنتجات
+</p>
+
+</div>
+
+
+
+<div class="stat-card">
+
+<h2>
+DZ
+</h2>
+
+<p>
+متجر الجزائر
+</p>
+
+</div>
+
+
+
+<div class="stat-card">
+
+<h2>
+✔
+</h2>
+
+<p>
+النظام يعمل
+</p>
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+<section class="add-box">
+
+
+<h2>
+➕ إضافة منتج جديد
+</h2>
+
+
+
+<div class="form-grid">
+
+
+
+<input 
+id="productName"
 placeholder="اسم المنتج">
 
 
-<input id="productPrice"
-placeholder="السعر بالدج"
-type="number">
+
+<input 
+id="productPrice"
+type="number"
+placeholder="السعر">
 
 
 
-<input id="productCategory"
-placeholder="القسم">
+<select id="productCategory">
 
 
-<input id="productImage"
+<option>
+اختر القسم
+</option>
+
+<option>
+ملابس
+</option>
+
+<option>
+أحذية
+</option>
+
+<option>
+إكسسوارات
+</option>
+
+<option>
+عطور
+</option>
+
+<option>
+تجميل
+</option>
+
+<option>
+ألعاب
+</option>
+
+
+</select>
+
+
+
+
+<input
+id="productImage"
 placeholder="رابط صورة المنتج">
 
-
-
-<button onclick="addProduct()">
-
-➕ إضافة المنتج
-
-</button>
 
 
 </div>
 
 
 
+<div class="preview">
+
+
+<img id="imagePreview"
+src="assets/images/default.png">
+
+
+</div>
+
+
+
+<button onclick="addProduct()">
+
+حفظ المنتج ✅
+
+</button>
+
+
+
+</section>
+
+
+
+
+
+
+<section class="products-area">
+
 
 <h2>
-المنتجات الحالية
+📦 المنتجات
 </h2>
 
 
@@ -79,11 +219,43 @@ class="products-grid">
 </div>
 
 
-
-</div>
-
-
 </section>
+
+
+
+</main>
+
+
+
+
+<script>
+
+
+const imageInput =
+document.getElementById("productImage");
+
+
+const preview =
+document.getElementById("imagePreview");
+
+
+
+imageInput.addEventListener(
+"input",
+()=>{
+
+
+preview.src =
+imageInput.value ||
+"assets/images/default.png";
+
+
+}
+
+);
+
+
+</script>
 
 
 
